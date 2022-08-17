@@ -76,16 +76,21 @@ fun CategoryLayout(
     viewModel: SSOTModel
 ) {
     val textState = remember { mutableStateOf(TextFieldValue("")) }
-    var tree = ComposeFilteredTree(viewModel.filteredCategories)
+    val categories = remember { mutableStateOf<List<String>>(viewModel.filteredCategories) }
 
     val searchedText = textState.value.text
     if (searchedText.isNotEmpty() && searchedText.length >= 2) {
         viewModel.onEvent(SSOTModel.UIEvent.SearchChanged(searchedText))
     }
 
+    Log.d(
+        "MyDebug",
+        "CategoryLayout"
+    )
+
     Column {
         SearchView(textState)
-        CategoryTree(tree)
+        CategoryTree(categories.value)
     }
 }
 
@@ -111,7 +116,10 @@ fun TreeScope.GetLeaves(categories: List<String>) {
 }
 
 @Composable
-fun CategoryTree(tree: Tree<String>) {
+fun CategoryTree(categories: List<String>) {
+
+    var tree = ComposeFilteredTree(categories)
+
     Column(
         verticalArrangement = Arrangement.Bottom,
         modifier = Modifier.fillMaxSize()
