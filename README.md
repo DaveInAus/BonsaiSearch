@@ -1,7 +1,7 @@
 # BonsaiSearch
 Android Bonsai Search 
 
-This is a test project to identify the issues related to searching Bonsai Trees\
+This is a test project to identify the issues related to searching Bonsai Trees
 
 **Current Status 17-08-22**\
 Results returned do not match the search Criteria\
